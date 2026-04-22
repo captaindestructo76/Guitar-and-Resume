@@ -121,3 +121,24 @@ h1, h2 {
 footer { text-align: center; margin-top: 50px; padding-bottom: 40px; }
 footer a { color: #e67e22; text-decoration: none; font-size: 0.9rem; }
 .privacy-note { font-size: 0.8rem; color: #888; margin-top: 15px; }
+
+/* Styling for your new image */
+.image-box {
+    text-align: center;
+    margin: 30px 0;
+    border: 3px solid #8b4513; /* Saddle Brown */
+    padding: 10px;
+    background-color: #2b1d16;
+}
+
+.image-box img {
+    max-width: 100%; /* Ensures it never overflows the screen */
+    height: auto;
+    border: 1px solid #e67e22; /* Burnt Amber accent */
+}
+
+.image-caption {
+    font-style: italic;
+    color: #e67e22;
+    margin-top: 10px;
+}
