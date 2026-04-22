@@ -1,0 +1,114 @@
+/* custom_styles_2.css - Guitar Vault Theme */
+
+body {
+    margin: 0;
+    font-family: 'Garamond', serif;
+    background-color: #1a0f0a; /* Deep Espresso */
+    color: #f5e6d3; /* Warm Parchment */
+    line-height: 1.6;
+}
+
+/* Requirement: Div style for positioning (Navigation) */
+.scratch-nav {
+    background-color: #2b1d16;
+    padding: 1.5rem 0;
+    border-bottom: 3px solid #8b4513; /* Saddle Brown */
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.site-title {
+    font-size: 1.8rem;
+    color: #e67e22; /* Burnt Amber */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.scratch-nav a {
+    color: #f5e6d3;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #e67e22;
+    padding: 5px 15px;
+    transition: 0.3s;
+}
+
+.scratch-nav a:hover {
+    background: #e67e22;
+    color: #1a0f0a;
+}
+
+/* Requirement: Positioning Divs */
+.scratch-content {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #e67e22;
+    border-bottom: 1px solid #4a2c1a;
+    padding-bottom: 10px;
+}
+
+/* Tuner Styles */
+.tuner-container {
+    background: #2b1d16;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #e67e22;
+    text-align: center;
+}
+
+.note-display { font-size: 6rem; color: #e67e22; font-weight: bold; }
+
+.meter {
+    width: 100%; height: 12px; background: #1a0f0a;
+    position: relative; margin: 30px 0; border-radius: 6px;
+}
+
+#tuner-needle {
+    width: 4px; height: 24px; background: #ffcc00;
+    position: absolute; top: -6px; left: 50%;
+    transform: translateX(-50%); transition: left 0.1s;
+}
+
+.tuner-btn {
+    background: #e67e22; color: #1a0f0a;
+    border: none; padding: 15px 30px; font-size: 1.2rem;
+    cursor: pointer; border-radius: 5px; font-weight: bold;
+}
+
+/* Requirement: Styles for images/video blocks */
+.video-container {
+    position: relative; padding-bottom: 56.25%; height: 0;
+    border: 4px solid #2b1d16; margin: 20px 0;
+}
+
+.video-container iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.tableau-wrapper {
+    background: white; padding: 15px; border-radius: 8px; margin-top: 20px;
+}
+
+footer { text-align: center; margin-top: 50px; }
+footer a { color: #e67e22; text-decoration: none; font-size: 0.9rem; }
+.privacy-note { font-size: 0.8rem; color: #888; margin-top: 15px; }
+
+.tuner-btn.stop {
+    background: #c0392b; /* A deep mahogany/red */
+    color: white;
+    margin-top: 10px;
+}
+
+.tuner-btn.stop:hover {
+    background: #a93226;
+}

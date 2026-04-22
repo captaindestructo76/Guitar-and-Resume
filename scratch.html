@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vault | Acoustic Gallery</title>
+    <link rel="stylesheet" href="styles/custom_styles_2.css">
+</head>
+<body>
+
+    <span id="top"></span>
+
+    <nav class="scratch-nav">
+        <div class="nav-container">
+            <span class="site-title">Guitar Vault</span>
+            <ul>
+                <li><a href="about.html">Professional Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="scratch-content">
+        <header class="content-header">
+            <h1>Acoustic & Grunge Gallery</h1>
+            <p>Exploring the intersection of technical playing and raw sound.</p>
+        </header>
+
+        <section class="gallery-section">
+            <h2>The Optimal Gear for the Optimal Sound</h2>
+            <div class="gear-lists">
+                <ol>
+                    <li>Acoustic Collection
+                        <ul>
+                            <li>Taylor 517e Builders Edition</li>
+                            <li>Martin D-28 Authentic</li>
+                        </ul>
+                    </li>
+                    <li>The Grunge Rig
+                        <ul>
+                            <li>Fender Jaguar (Cobain Specs)</li>
+                            <li>Electro-Harmonix Big Muff Pi</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="app-section">
+            <h2>Interactive Chromatic Tuner</h2>
+            <p>Click "Start Tuner" to begin. Use "Stop" to turn off your microphone.</p>
+            <div class="tuner-container">
+                <div class="note-display"><span id="note-name">-</span></div>
+                <div class="meter"><div id="tuner-needle"></div></div>
+                <div class="frequency"><span id="freq-val">0</span> Hz</div>
+                
+                <div class="tuner-controls">
+                    <button id="start-tuner-btn" class="tuner-btn">Start Tuner</button>
+                    <button id="stop-tuner-btn" class="tuner-btn stop" style="display:none;">Stop Tuner</button>
+                </div>
+                <p class="privacy-note">Privacy Note: Microphone audio is processed locally and never recorded.</p>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <h2>Favorite Performance</h2>
+            <p>John Mayer's <em>"Neon"</em> (Live in LA) - A masterclass in acoustic technique.</p>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/zciynSXSmus" 
+                    title="John Mayer - Neon Live" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                <a href="https://www.youtube.com/watch?v=zciynSXSmus" target="_blank" style="color: #e67e22;">Watch directly on YouTube</a> if the embed is restricted by your browser.
+            </p>
+        </section>
+
+        <section class="data-section">
+            <h2>Guitar Chords Analytics</h2>
+            <div class="tableau-wrapper">
+                <div class='tableauPlaceholder' id='viz1776819445968' style='position: relative'>
+                    <noscript><a href='#'><img alt='Guitar Chords Classroom ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;J8&#47;J8PM3R2K8&#47;1_rss.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='path' value='shared&#47;J8PM3R2K8' /> 
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;J8&#47;J8PM3R2K8&#47;1.png' /> 
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1776819445968');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    vizElement.style.width='100%'; vizElement.style.height='600px';
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </section>
+
+        <footer>
+            <a href="#top">Back to Top</a>
+        </footer>
+    </main>
+
+    <script>
+        // ... (The tuner script logic from the previous version remains the same)
+        const noteNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        let audioContext, analyser, dataArray, source, stream, animationId;
+        const startBtn = document.getElementById('start-tuner-btn');
+        const stopBtn = document.getElementById('stop-tuner-btn');
+
+        startBtn.addEventListener('click', async () => {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                source = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 2048;
+                source.connect(analyser);
+                dataArray = new Float32Array(analyser.fftSize);
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'inline-block';
+                updateTuner();
+            } catch (err) {
+                alert("Microphone access is required for the tuner.");
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (stream) stream.getTracks().forEach(track => track.stop());
+            if (animationId) cancelAnimationFrame(animationId);
+            document.getElementById('note-name').innerText = "-";
+            document.getElementById('freq-val').innerText = "0";
+            document.getElementById('tuner-needle').style.left = "50%";
+            stopBtn.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+        });
+
+        function updateTuner() {
+            analyser.getFloatTimeDomainData(dataArray);
+            const pitch = autoCorrelate(dataArray, audioContext.sampleRate);
+            if (pitch !== -1) {
+                const midiNum = 12 * (Math.log2(pitch / 440)) + 69;
+                const noteIndex = Math.round(midiNum) % 12;
+                const diff = (midiNum - Math.round(midiNum)) * 100;
+                document.getElementById('note-name').innerText = noteNames[noteIndex];
+                document.getElementById('freq-val').innerText = Math.round(pitch);
+                document.getElementById('tuner-needle').style.left = `${50 + (diff / 2)}%`;
+            }
+            animationId = requestAnimationFrame(updateTuner);
+        }
+
+        function autoCorrelate(buf, sampleRate) {
+            let SIZE = buf.length; let rms = 0;
+            for (let i = 0; i < SIZE; i++) rms += buf[i] * buf[i];
+            if (Math.sqrt(rms / SIZE) < 0.01) return -1;
+            let r1 = 0, r2 = SIZE - 1, thres = 0.2;
+            for (let i = 0; i < SIZE / 2; i++) if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+            for (let i = 1; i < SIZE / 2; i++) if (Math.abs(buf[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+            buf = buf.slice(r1, r2); SIZE = buf.length;
+            let c = new Array(SIZE).fill(0);
+            for (let i = 0; i < SIZE; i++) for (let j = 0; j < SIZE - i; j++) c[i] = c[i] + buf[j] * buf[j + i];
+            let d = 0; while (c[d] > c[d + 1]) d++;
+            let maxval = -1, maxpos = -1;
+            for (let i = d; i < SIZE; i++) { if (c[i] > maxval) { maxval = c[i]; maxpos = i; } }
+            return sampleRate / maxpos;
+        }
+    </script>
+</body>
+</html>
