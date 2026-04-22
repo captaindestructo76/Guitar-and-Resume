@@ -8,11 +8,11 @@ body {
     line-height: 1.6;
 }
 
-/* Requirement: Div style for positioning (Navigation) */
+/* --- NAVIGATION --- */
 .scratch-nav {
     background-color: #2b1d16;
-    padding: 1.5rem 0;
-    border-bottom: 3px solid #8b4513; /* Saddle Brown */
+    padding: 1.2rem 0; /* Adjusted for a cleaner look */
+    border-bottom: 3px solid #8b4513; 
 }
 
 .nav-container {
@@ -20,14 +20,22 @@ body {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center; /* CRITICAL: Vertically aligns title and button */
     padding: 0 20px;
 }
 
 .site-title {
     font-size: 1.8rem;
-    color: #e67e22; /* Burnt Amber */
+    color: #e67e22; 
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin: 0; /* Prevents text height from pushing the nav bar */
+}
+
+.scratch-nav ul {
+    list-style: none; /* Removes any default bullet points */
+    margin: 0;
+    padding: 0;
 }
 
 .scratch-nav a {
@@ -35,8 +43,9 @@ body {
     text-decoration: none;
     font-weight: bold;
     border: 1px solid #e67e22;
-    padding: 5px 15px;
+    padding: 8px 18px;
     transition: 0.3s;
+    display: inline-block; /* Ensures the button keeps its shape */
 }
 
 .scratch-nav a:hover {
@@ -44,7 +53,7 @@ body {
     color: #1a0f0a;
 }
 
-/* Requirement: Positioning Divs */
+/* --- CONTENT --- */
 .scratch-content {
     max-width: 900px;
     margin: 40px auto;
@@ -85,7 +94,17 @@ h1, h2 {
     cursor: pointer; border-radius: 5px; font-weight: bold;
 }
 
-/* Requirement: Styles for images/video blocks */
+.tuner-btn.stop {
+    background: #c0392b; 
+    color: white;
+    margin-top: 10px;
+}
+
+.tuner-btn.stop:hover {
+    background: #a93226;
+}
+
+/* Multimedia Styles */
 .video-container {
     position: relative; padding-bottom: 56.25%; height: 0;
     border: 4px solid #2b1d16; margin: 20px 0;
@@ -99,16 +118,6 @@ h1, h2 {
     background: white; padding: 15px; border-radius: 8px; margin-top: 20px;
 }
 
-footer { text-align: center; margin-top: 50px; }
+footer { text-align: center; margin-top: 50px; padding-bottom: 40px; }
 footer a { color: #e67e22; text-decoration: none; font-size: 0.9rem; }
 .privacy-note { font-size: 0.8rem; color: #888; margin-top: 15px; }
-
-.tuner-btn.stop {
-    background: #c0392b; /* A deep mahogany/red */
-    color: white;
-    margin-top: 10px;
-}
-
-.tuner-btn.stop:hover {
-    background: #a93226;
-}
