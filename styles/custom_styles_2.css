@@ -112,15 +112,3 @@ footer a { color: #e67e22; text-decoration: none; font-size: 0.9rem; }
 .tuner-btn.stop:hover {
     background: #a93226;
 }
-/* --- Mobile Responsive (Only for screens smaller than 768px) --- */
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column; /* Stacks items on mobile */
-        text-align: center;
-        gap: 15px;
-    }
-
-    .site-title {
-        margin-bottom: 10px;
-    }
-}
